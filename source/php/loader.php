@@ -27,9 +27,6 @@
 * @author Steve Sperandeo <steve.sperandeo@altumo.com>
 */
   
-    //set default timezone
-        date_default_timezone_set( 'America/Los_Angeles' );
-  
     //symfony 2 autoloader (for classes within namespaces)
         require_once __DIR__ . '/Utils/UniversalClassLoader.php';
         $loader = new Symfony\Component\ClassLoader\UniversalClassLoader();
