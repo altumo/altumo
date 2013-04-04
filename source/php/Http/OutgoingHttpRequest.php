@@ -75,6 +75,7 @@ class OutgoingHttpRequest{
     protected $ssl_cert_temp_file = null;
     //path to a file that contains the SSL certificate data to be used on requests
     
+    
     const HTTP_METHOD_POST = 'POST';
     const HTTP_METHOD_GET = 'GET';
     const HTTP_METHOD_PUT = 'PUT';
@@ -1049,7 +1050,7 @@ class OutgoingHttpRequest{
           
         $this->closeCurlHandle();
         if( file_exists($this->getCookieFilename()) ){
-            //unlink( $this->getCookieFilename() );
+            @unlink( $this->getCookieFilename() );
         }
         
         // Delete the SSL temp certificate file if one exists
