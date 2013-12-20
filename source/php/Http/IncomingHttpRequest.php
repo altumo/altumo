@@ -36,13 +36,40 @@ class IncomingHttpRequest{
     * @return IncomingHttpRequest
     */
     function __construct() {
-        
-        $this->setHeaders( getallheaders() );
-        $this->setMessageBody( @file_get_contents('php://input') );
+
+        $this->setHeaders( $this->getAllHeaders() );
+        $this->setMessageBody( @\file_get_contents('php://input') );
         
     }
-   
-    
+
+
+    /**
+     * Webserver-agnostic version of getallheaders()
+     *
+     * @return string
+     */
+    protected function getAllHeaders(){
+
+        if( !function_exists('getallheaders') ){
+
+            function getallheaders(){
+                $headers = '';
+                foreach ( $_SERVER as $name => $value ){
+                    if( substr($name, 0, 5) == 'HTTP_' ){
+                        $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
+                    }
+                }
+                return $headers;
+            }
+
+        } else {
+
+            return \getallheaders();
+
+        }
+    }
+
+
     /**
     * Gets the full HTTP Requst as a string (headers + message body).
     * 
