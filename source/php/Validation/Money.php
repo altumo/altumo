@@ -58,7 +58,7 @@ class Money{
 	 */
 	static public function assertCommonPositiveAmount( $amount, $message = null )
 	{
-		if ( null === $message ) $message = 'Valid passed is not a common positive amount';
+		if ( null === $message ) $message = 'Value passed is not a common positive amount';
 		
 		// assert amount first
 		static::assertCommonAmount( $amount, $message );
